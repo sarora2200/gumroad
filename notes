@@ -1,0 +1,7 @@
+Amazing animals 
+gumroad products page publish pnwimm ./amazinganimals.html --json --no-input --non-interactive
+
+
+ABC Adventure
+gumroad products page publish aciqpu ./abcadventure.html --json --no-input --non-interactive
+
