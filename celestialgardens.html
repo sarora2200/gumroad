@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celestial Gardens · Adult Coloring Book</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        /* ===== Custom Styles (adapted for Celestial Gardens) ===== */
+        :root {
+            --bg-primary: #fcf9f5;
+            --bg-secondary: #f8f4ee;
+            --text-primary: #2d3748;
+            --text-secondary: #5a6a7a;
+            --text-muted: #8a9aa8;
+            --yellow: #e8b84c;
+            --yellow-soft: #f5e6b8;
+            --orange: #e8a84c;
+            --orange-soft: #f5dec8;
+            --teal: #6ecfc7;
+            --teal-soft: #d4f0ed;
+            --blue: #8ac0ee;
+            --blue-soft: #dceaf5;
+            --purple: #b088c4;
+            --purple-soft: #ede0f5;
+            --pink: #e8a0b8;
+            --pink-soft: #f5dce4;
+            --card-bg: #ffffff;
+            --border-color: #ede8e0;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.10);
+            --radius: 20px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16162a;
+            --text-primary: #e8e8f0;
+            --text-secondary: #b0b0c8;
+            --text-muted: #7878a0;
+            --card-bg: #222240;
+            --border-color: #333358;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.4);
+            --yellow: #d4a84c;
+            --yellow-soft: #2a2418;
+            --orange: #d4984c;
+            --orange-soft: #2a2018;
+            --teal: #5ab8b0;
+            --teal-soft: #182a28;
+            --blue: #6aacd8;
+            --blue-soft: #18222a;
+            --purple: #9878b0;
+            --purple-soft: #22182a;
+            --pink: #d088a0;
+            --pink-soft: #2a1820;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--blue-soft) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--purple), var(--blue), var(--teal), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .age-badge {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .hero-text .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0 28px;
+        }
+
+        .hero-text .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            list-style: none;
+            padding: 6px 0;
+        }
+
+        .hero-text .features-list li span {
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: var(--card-bg);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            max-width: 440px;
+            width: 100%;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-cover {
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: 16px;
+            /* NEW COVER IMAGE */
+            background-image: url('https://public-files.gumroad.com/4yw30huj3ehlgydyop3is9vpx00m');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+        }
+
+        .product-cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(252, 251, 251, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .product-cover-overlay .cover-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 2px;
+        }
+
+        .product-cover-overlay .cover-text {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+
+        .product-cover-overlay .cover-sub {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 400;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: var(--text-primary);
+        }
+
+        .product-author {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 8px 0 4px;
+            color: var(--text-primary);
+        }
+
+        .product-price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Buy Button ===== */
+        .buy-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 28px;
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(176, 136, 196, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(176, 136, 196, 0.35);
+            background: var(--purple);
+            filter: brightness(1.1);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .secure-badge {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 6px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+        }
+
+        /* ===== Features Section ===== */
+        .features-section {
+            padding: 72px 0;
+            background: var(--bg-secondary);
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: 28px 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--purple);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ===== Preview Gallery ===== */
+        .preview-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: default;
+        }
+
+        .preview-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--purple);
+        }
+
+        .preview-item img {
+            transition: transform 0.4s ease;
+        }
+
+        .preview-item:hover img {
+            transform: scale(1.02);
+        }
+
+        /* ===== Who It's For ===== */
+        .audience-section {
+            padding: 72px 0;
+            background: var(--bg-primary);
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .audience-item {
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .audience-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--teal);
+        }
+
+        .audience-item .emoji {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .audience-item h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .audience-item p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ===== Testimonials ===== */
+        .testimonials {
+            padding: 72px 0;
+            background: var(--bg-secondary);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .testimonial-item {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-item .stars {
+            color: var(--yellow);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .testimonial-item blockquote {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-item .author {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-item .role {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 72px 0;
+            background: var(--bg-primary);
+        }
+
+        .faq-grid {
+            max-width: 740px;
+            margin: 8px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--purple);
+        }
+
+        .faq-question {
+            padding: 18px 22px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+
+        .faq-answer {
+            padding: 0 22px 18px;
+            color: var(--text-secondary);
+            display: none;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question .toggle {
+            transform: rotate(180deg);
+        }
+
+        .toggle {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 72px 20px;
+            background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .cta-section p {
+            font-size: 1.05rem;
+            max-width: 560px;
+            margin: 0 auto 28px;
+            color: var(--text-secondary);
+        }
+
+        .cta-section .buy-btn {
+            display: inline-block;
+            width: auto;
+            padding: 16px 44px;
+            font-size: 1.1rem;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cta-features span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            padding: 32px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--purple);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        /* ===== Scroll Animations ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text .subtitle {
+                margin: 0 auto 20px;
+            }
+
+            .hero-text .features-list {
+                align-items: center;
+            }
+
+            .trust-badges {
+                justify-content: center;
+            }
+
+            .product-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 60px 16px;
+            }
+
+            .product-card {
+                padding: 20px;
+            }
+
+            .product-price {
+                font-size: 1.8rem;
+            }
+
+            .features-grid,
+            .testimonials-grid,
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-cover-overlay .cover-text {
+                font-size: 1.3rem;
+            }
+
+            .product-cover-overlay .cover-emoji {
+                font-size: 2.2rem;
+            }
+
+            .cta-section .buy-btn {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+
+            .cta-features {
+                gap: 12px;
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .product-cover {
+                min-height: 140px;
+            }
+
+            .product-cover-overlay .cover-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Theme Toggle ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+    </button>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text fade-in">
+                <span class="age-badge">✨ For Adults</span>
+                <h1>
+                    <span>Celestial Gardens</span><br />
+                    An Adult Coloring Book
+                </h1>
+                <p class="subtitle">
+                    Escape the everyday with Celestial Gardens — an adult coloring book designed to help you unwind, de-stress, and reconnect with your creativity. Featuring intricate botanical and celestial illustrations, every page is a meditative journey waiting to be brought to life with color.
+                </p>
+
+                <ul class="features-list">
+                    <li><span>🌿</span> Beautifully detailed designs crafted for adult colorists</li>
+                    <li><span>🌙</span> Includes floral mandalas, moon phases, star maps, and enchanted garden scenes</li>
+                    <li><span>📄</span> Printed on thick, high-quality paper to prevent bleed-through</li>
+                    <li><span>🖍️</span> Compatible with colored pencils, markers, and gel pens</li>
+                    <li><span>🧘</span> Perfect for mindfulness, relaxation, and creative self-care</li>
+                </ul>
+
+                <div class="trust-badges">
+                    <span>⭐ Loved by colorists</span>
+                    <span>🧘 Mindfulness approved</span>
+                    <span>🎨 50 beautiful designs</span>
+                </div>
+            </div>
+
+            <div class="hero-image fade-in delay-2">
+                <div class="product-card">
+                    <div class="product-cover">
+                        <!-- Cover image is set via CSS background-image: url('...') -->
+                        <div class="product-cover-overlay">
+                            <!-- Minimal overlay; cover art speaks for itself -->
+                        </div>
+                    </div>
+
+                    <div class="product-name">Celestial Gardens</div>
+                    <div class="product-author">by Sarah Abdeldayem</div>
+
+                    <div class="product-price">
+                        $<span id="priceDisplay">5.00</span>
+                        <small>USD</small>
+                    </div>
+
+                    <p class="product-description">
+                        ⚡ Instant Download · 🖨️ Print Unlimited · 🌌 50 Beautiful Designs
+                    </p>
+
+                    <!-- ===== BUY BUTTON (placeholder link - update with your Gumroad URL) ===== -->
+                    <a href="#" target="_blank" class="buy-btn" id="mainBuyBtn">
+                        🌙 Get Celestial Gardens Now
+                    </a>
+
+                    <div class="secure-badge">
+                        🔒 Secure checkout · Instant access
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PREVIEW GALLERY (with new images) ===== -->
+    <section class="preview-section" style="padding: 72px 0; background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-label">📸 Sneak Peek</div>
+            <h2 class="section-title">See What's Inside</h2>
+            <p class="section-subtitle">
+                A real look at the intricate, meditative illustrations you'll love to color.
+            </p>
+
+            <div class="preview-grid" style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 24px;
+                margin-top: 8px;
+            ">
+                <!-- IMAGE 1 (NEW) -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/nkx5ql5ayr7uc0zz8c8bogltz3bm"
+                            alt="Intricate floral mandala design"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                    </p>
+                </div>
+
+                <!-- IMAGE 2 (NEW) -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/vztcdcy41l28t2ed42rk975laza3"
+                            alt="Celestial star map design"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                    </p>
+                </div>
+
+                <!-- IMAGE 3 (NEW) -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/mmiyan8djemetjcdlc25xhi8rurj"
+                            alt="Enchanted garden scene"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                    </p>
+                </div>
+
+                <!-- IMAGE 4 (NEW) -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/bp8lln4uvh8qgh6oy87heigu1o03"
+                            alt="Moon phases design"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                    </p>
+                </div>
+            </div>
+             <!-- Trust note -->
+            <p style="
+                text-align: center;
+                margin-top: 32px;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+            ">
+                ⭐ A selection of pages from the full 50-design book — <strong style="color: var(--purple);">instant download!</strong>
+            </p>
+            </div>
+    </section>
+
+    <!-- ===== Who It's For ===== -->
+    <section class="audience-section">
+        <div class="container">
+            <div class="section-label">Who is this for?</div>
+            <h2 class="section-title">Your peaceful retreat awaits</h2>
+            <p class="section-subtitle">
+                Whether you're a seasoned colorist or just starting out, Celestial Gardens is for everyone.
+            </p>
+
+            <div class="audience-grid">
+                <div class="audience-item fade-in">
+                    <span class="emoji">🧘</span>
+                    <h4>Mindfulness Seekers</h4>
+                    <p>Relax and unwind with meditative coloring</p>
+                </div>
+                <div class="audience-item fade-in delay-1">
+                    <span class="emoji">🎨</span>
+                    <h4>Art Enthusiasts</h4>
+                    <p>Intricate designs for creative expression</p>
+                </div>
+                <div class="audience-item fade-in delay-2">
+                    <span class="emoji">🎁</span>
+                    <h4>Gift Givers</h4>
+                    <p>A thoughtful present for any occasion</p>
+                </div>
+                <div class="audience-item fade-in delay-3">
+                    <span class="emoji">🌙</span>
+                    <h4>Dreamers</h4>
+                    <p>Escape into mystical botanical worlds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features Section ===== -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-label">Why Celestial Gardens?</div>
+            <h2 class="section-title">More than just a coloring book</h2>
+            <p class="section-subtitle">
+                Each page is an invitation to pause, breathe, and create.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <span class="feature-icon">🌿</span>
+                    <h3>Intricate Designs</h3>
+                    <p>Beautifully detailed illustrations crafted for adult colorists.</p>
+                </div>
+                <div class="feature-item fade-in delay-1">
+                    <span class="feature-icon">🌙</span>
+                    <h3>Mystical Themes</h3>
+                    <p>Floral mandalas, moon phases, star maps, and enchanted gardens.</p>
+                </div>
+                <div class="feature-item fade-in delay-2">
+                    <span class="feature-icon">📄</span>
+                    <h3>Premium Paper</h3>
+                    <p>Thick, high-quality pages to prevent bleed-through.</p>
+                </div>
+                <div class="feature-item fade-in delay-3">
+                    <span class="feature-icon">🖍️</span>
+                    <h3>Versatile</h3>
+                    <p>Compatible with colored pencils, markers, and gel pens.</p>
+                </div>
+                <div class="feature-item fade-in delay-4">
+                    <span class="feature-icon">🧘</span>
+                    <h3>Mindfulness</h3>
+                    <p>Designed for relaxation, de-stress, and creative self-care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <!-- ===== Testimonials ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-label">Testimonials</div>
+            <h2 class="section-title">What colorists are saying</h2>
+            <p class="section-subtitle">
+                Real feedback from those who've found their peaceful retreat.
+            </p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-item fade-in">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"This book is an absolute dream. The designs are so intricate and beautiful, it's the perfect way to unwind after a long day."</blockquote>
+                    <div class="author">— Emily R.</div>
+                    <div class="role">Art Therapist</div>
+                </div>
+                <div class="testimonial-item fade-in delay-1">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"I've tried many adult coloring books, but this one is special. The celestial theme is magical, and the paper quality is excellent."</blockquote>
+                    <div class="author">— David M.</div>
+                    <div class="role">Mindfulness Practitioner</div>
+                </div>
+                <div class="testimonial-item fade-in delay-2">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"Bought this as a gift for my sister, and she hasn't put it down. It's a beautiful, calming escape from the everyday."</blockquote>
+                    <div class="author">— Jessica L.</div>
+                    <div class="role">Satisfied Customer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">
+                Quick answers about Celestial Gardens.
+            </p>
+
+            <div class="faq-grid">
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What makes this coloring book different?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Celestial Gardens combines mystical botanical and celestial themes with intricate, meditative designs. It's crafted specifically for adults seeking relaxation and creative expression.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What kind of paper is used?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        The book is printed on thick, high-quality paper designed to prevent bleed-through, making it compatible with colored pencils, markers, and gel pens.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I access my purchase?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        You'll receive an instant download link immediately after purchase via email. You can also find it in your Gumroad library. Print as many times as you need!
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is this suitable for beginners?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! Whether you're a seasoned colorist or just starting out, Celestial Gardens offers a peaceful, enjoyable experience for all skill levels.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is there a money-back guarantee?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We stand behind our product. If you're not completely satisfied, we offer a 30-day money-back guarantee.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA Section ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>🌙 Ready to Escape & Create?</h2>
+            <p>
+                Find your peaceful retreat with 50 beautiful, meditative designs waiting for your personal touch.
+            </p>
+            <a href="#" target="_blank" class="buy-btn">
+                🌌 Get Celestial Gardens Now — $5.00
+            </a>
+            <div class="cta-features">
+                <span>⚡ Instant Download</span>
+                <span>🖨️ Print Unlimited</span>
+                <span>💯 30-Day Guarantee</span>
+                <span>🌿 50 Beautiful Designs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 <a href="#">Celestial Gardens</a> — Made with ❤️ for creative souls</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        // ===== Theme Toggle =====
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+            toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+            toggle.addEventListener('click', function() {
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
+        })();
+
+        // ===== Scroll Animations =====
+        (function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Initially show already visible elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.classList.add('visible');
+                }
+            });
+        })();
+
+        // ===== FAQ Toggle =====
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        console.log('🌙 Celestial Gardens landing page loaded!');
+    </script>
+</body>
+</html>

@@ -5,3 +5,11 @@ gumroad products page publish pnwimm ./amazinganimals.html --json --no-input --n
 ABC Adventure
 gumroad products page publish aciqpu ./abcadventure.html --json --no-input --non-interactive
 
+Celestial Gardens
+gumroad products page publish pyoydg ./celestialgardens.html --json --no-input --non-interactive
+
+Ultimate Sudoku
+gumroad products page publish cxjfb ./ultimatesudoku.html --json --no-input --non-interactive
+
+Easy Sudoku
+gumroad products page publish fzjmpu ./easysudoku.html --json --no-input --non-interactive
