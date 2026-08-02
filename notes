@@ -13,3 +13,6 @@ gumroad products page publish cxjfb ./ultimatesudoku.html --json --no-input --no
 
 Easy Sudoku
 gumroad products page publish fzjmpu ./easysudoku.html --json --no-input --non-interactive
+
+Beach Puzzle
+gumroad products page publish iarlr ./beachpuzzle.html --json --no-input --non-interactive

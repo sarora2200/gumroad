@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Search Puzzle Book · Sharpen Your Mind</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        /* ===== Custom Styles (adapted for Word Search Book) ===== */
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --yellow: #eab308;
+            --yellow-soft: #fef9c3;
+            --orange: #f59e0b;
+            --orange-soft: #fef3c7;
+            --teal: #14b8a6;
+            --teal-soft: #ccfbf1;
+            --blue: #3b82f6;
+            --blue-soft: #dbeafe;
+            --purple: #8b5cf6;
+            --purple-soft: #ede9fe;
+            --pink: #ec4899;
+            --pink-soft: #fce7f3;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.10);
+            --radius: 20px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.4);
+            --yellow: #eab308;
+            --yellow-soft: #422b00;
+            --orange: #f59e0b;
+            --orange-soft: #3d2a00;
+            --teal: #14b8a6;
+            --teal-soft: #042f2a;
+            --blue: #3b82f6;
+            --blue-soft: #172554;
+            --purple: #8b5cf6;
+            --purple-soft: #2e1065;
+            --pink: #ec4899;
+            --pink-soft: #4a0d2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--yellow-soft) 0%, transparent 70%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--blue-soft) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--yellow), var(--orange), var(--teal), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .age-badge {
+            display: inline-block;
+            background: var(--yellow);
+            color: #0f172a;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .hero-text .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0 28px;
+        }
+
+        .hero-text .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            list-style: none;
+            padding: 6px 0;
+        }
+
+        .hero-text .features-list li span {
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: var(--card-bg);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            max-width: 440px;
+            width: 100%;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-cover {
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: 16px;
+            /* COVER IMAGE */
+            background-image: url('https://public-files.gumroad.com/prlp3m4vue8b1ym555xkfvpoqeo5');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+        }
+
+        .product-cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(252, 251, 251, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .product-cover-overlay .cover-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 2px;
+        }
+
+        .product-cover-overlay .cover-text {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+
+        .product-cover-overlay .cover-sub {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 400;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: var(--text-primary);
+        }
+
+        .product-author {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 8px 0 4px;
+            color: var(--text-primary);
+        }
+
+        .product-price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Buy Button ===== */
+        .buy-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 28px;
+            background: var(--yellow);
+            color: #0f172a;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(234, 179, 8, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(234, 179, 8, 0.35);
+            background: var(--orange);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .secure-badge {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 6px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
+        }
+
+        /* ===== Features Section ===== */
+        .features-section {
+            padding: 72px 0;
+            background: var(--bg-secondary);
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: 28px 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--yellow);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ===== Who It's For ===== */
+        .audience-section {
+            padding: 72px 0;
+            background: var(--bg-primary);
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .audience-item {
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .audience-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--teal);
+        }
+
+        .audience-item .emoji {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .audience-item h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .audience-item p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ===== Testimonials ===== */
+        .testimonials {
+            padding: 72px 0;
+            background: var(--bg-secondary);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .testimonial-item {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-item .stars {
+            color: var(--yellow);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .testimonial-item blockquote {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-item .author {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-item .role {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 72px 0;
+            background: var(--bg-primary);
+        }
+
+        .faq-grid {
+            max-width: 740px;
+            margin: 8px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--yellow);
+        }
+
+        .faq-question {
+            padding: 18px 22px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+
+        .faq-answer {
+            padding: 0 22px 18px;
+            color: var(--text-secondary);
+            display: none;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question .toggle {
+            transform: rotate(180deg);
+        }
+
+        .toggle {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 72px 20px;
+            background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--yellow-soft) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .cta-section p {
+            font-size: 1.05rem;
+            max-width: 560px;
+            margin: 0 auto 28px;
+            color: var(--text-secondary);
+        }
+
+        .cta-section .buy-btn {
+            display: inline-block;
+            width: auto;
+            padding: 16px 44px;
+            font-size: 1.1rem;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cta-features span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            padding: 32px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        /* ===== Scroll Animations ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text .subtitle {
+                margin: 0 auto 20px;
+            }
+
+            .hero-text .features-list {
+                align-items: center;
+            }
+
+            .trust-badges {
+                justify-content: center;
+            }
+
+            .product-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 60px 16px;
+            }
+
+            .product-card {
+                padding: 20px;
+            }
+
+            .product-price {
+                font-size: 1.8rem;
+            }
+
+            .features-grid,
+            .testimonials-grid,
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-cover-overlay .cover-text {
+                font-size: 1.3rem;
+            }
+
+            .product-cover-overlay .cover-emoji {
+                font-size: 2.2rem;
+            }
+
+            .cta-section .buy-btn {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+
+            .cta-features {
+                gap: 12px;
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .product-cover {
+                min-height: 140px;
+            }
+
+            .product-cover-overlay .cover-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Theme Toggle ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+    </button>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text fade-in">
+                <span class="age-badge">🔍 For All Ages</span>
+                <h1>
+                    <span>Word Search</span><br />
+                    Puzzle Book
+                </h1>
+                <p class="subtitle">
+                    Sharpen Your Mind, One Word at a Time — Get ready to challenge your brain and unwind with our Word Search Puzzle Book, the perfect companion for puzzle lovers of all ages!
+                </p>
+
+                <ul class="features-list">
+                    <li><span>🔍</span> Hundreds of carefully crafted word search grids</li>
+                    <li><span>📚</span> A wide variety of themes and categories to keep things fresh</li>
+                    <li><span>⭐</span> Multiple difficulty levels — from beginner to expert</li>
+                    <li><span>📖</span> Clean, easy-to-read layouts for comfortable solving</li>
+                </ul>
+
+                <div class="trust-badges">
+                    <span>⭐ Loved by puzzle fans</span>
+                    <span>🧠 Boost vocabulary</span>
+                    <span>✈️ Perfect for travel</span>
+                </div>
+            </div>
+
+            <div class="hero-image fade-in delay-2">
+                <div class="product-card">
+                    <div class="product-cover">
+                        <!-- Cover image is set via CSS background-image -->
+                        <div class="product-cover-overlay">
+                            <!-- Minimal overlay; cover art speaks for itself -->
+                        </div>
+                    </div>
+
+                    <div class="product-name">Word Search Puzzle Book</div>
+                    <div class="product-author">by Sarah Abdeldayem</div>
+
+                    <div class="product-price">
+                        $<span id="priceDisplay">5.00</span>
+                        <small>USD</small>
+                    </div>
+
+                    <p class="product-description">
+                        ⚡ Instant Download · 🖨️ Print Unlimited · 🔍 Hundreds of Puzzles
+                    </p>
+
+                    <!-- ===== BUY BUTTON (linked to your Gumroad product) ===== -->
+                    <a href="https://sarahabdeldayem.gumroad.com/l/iarlr" target="_blank" class="buy-btn" id="mainBuyBtn">
+                        🔍 Get the Word Search Book Now
+                    </a>
+
+                    <div class="secure-badge">
+                        🔒 Secure checkout · Instant access
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features Section ===== -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-label">What's Inside</div>
+            <h2 class="section-title">Everything You Need for Hours of Fun</h2>
+            <p class="section-subtitle">
+                Hundreds of puzzles, a variety of themes, and multiple difficulty levels to keep you engaged.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <span class="feature-icon">🔍</span>
+                    <h3>Hundreds of Puzzles</h3>
+                    <p>Carefully crafted word search grids with a wide variety of themes and categories.</p>
+                </div>
+                <div class="feature-item fade-in delay-1">
+                    <span class="feature-icon">⭐</span>
+                    <h3>Multiple Difficulty Levels</h3>
+                    <p>From beginner-friendly to expert-level challenges — something for everyone.</p>
+                </div>
+                <div class="feature-item fade-in delay-2">
+                    <span class="feature-icon">📖</span>
+                    <h3>Easy-to-Read Layout</h3>
+                    <p>Clean, comfortable layouts designed for stress-free solving.</p>
+                </div>
+                <div class="feature-item fade-in delay-3">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Instant Download</h3>
+                    <p>No waiting, no shipping — get your puzzles immediately after purchase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <!-- ===== Who It's For ===== -->
+    <section class="audience-section">
+        <div class="container">
+            <div class="section-label">Perfect For</div>
+            <h2 class="section-title">Puzzle Lovers of All Ages</h2>
+            <p class="section-subtitle">
+                From adults to kids, this book is designed for anyone looking to relax and sharpen their mind.
+            </p>
+
+            <div class="audience-grid">
+                <div class="audience-item fade-in">
+                    <span class="emoji">👨‍👩‍👧‍👦</span>
+                    <h4>Adults, Seniors & Kids</h4>
+                    <p>Fun for the whole family</p>
+                </div>
+                <div class="audience-item fade-in delay-1">
+                    <span class="emoji">✈️</span>
+                    <h4>Travel & Commutes</h4>
+                    <p>Perfect for on-the-go entertainment</p>
+                </div>
+                <div class="audience-item fade-in delay-2">
+                    <span class="emoji">🎁</span>
+                    <h4>Gift Giving</h4>
+                    <p>Great for birthdays, holidays, or any occasion</p>
+                </div>
+                <div class="audience-item fade-in delay-3">
+                    <span class="emoji">🧘</span>
+                    <h4>Quiet Evenings</h4>
+                    <p>Unwind and focus at home</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-label">Testimonials</div>
+            <h2 class="section-title">What Puzzle Lovers Are Saying</h2>
+            <p class="section-subtitle">
+                Real feedback from those who've enjoyed the Word Search Puzzle Book.
+            </p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-item fade-in">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"This word search book is fantastic! The variety of themes keeps it interesting, and the difficulty levels are perfect for our whole family."</blockquote>
+                    <div class="author">— The Johnson Family</div>
+                    <div class="role">Family Puzzle Time</div>
+                </div>
+                <div class="testimonial-item fade-in delay-1">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"I love taking this book on my commute. It's a great way to unwind and keep my brain sharp. The large print is a huge plus!"</blockquote>
+                    <div class="author">— Michael R.</div>
+                    <div class="role">Daily Commuter</div>
+                </div>
+                <div class="testimonial-item fade-in delay-2">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"Bought this as a gift for my grandmother, and she absolutely loves it. She says it's the perfect way to spend her afternoons."</blockquote>
+                    <div class="author">— Emily T.</div>
+                    <div class="role">Satisfied Granddaughter</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">
+                Quick answers about the Word Search Puzzle Book.
+            </p>
+
+            <div class="faq-grid">
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How many puzzles are included?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        The book includes hundreds of carefully crafted word search grids across a wide variety of themes and categories.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Are there different difficulty levels?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! The book offers multiple difficulty levels, from beginner-friendly to expert-level challenges, so there's something for everyone.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is this book suitable for seniors?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! The clean, easy-to-read layouts are designed for comfortable solving, making it perfect for seniors and adults of all ages.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I access my purchase?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        You'll receive an instant download link immediately after purchase via email. You can also find it in your Gumroad library. Print as many times as you need!
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is there a money-back guarantee?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We stand behind our product. If you're not completely satisfied, we offer a 30-day money-back guarantee.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA Section ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>🔍 Ready to Sharpen Your Mind?</h2>
+            <p>
+                Put down the screen and pick up a pencil — hours of fun and focus are waiting for you!
+            </p>
+            <a href="https://sarahabdeldayem.gumroad.com/l/iarlr" target="_blank" class="buy-btn">
+                🔍 Get the Word Search Book Now — $5.00
+            </a>
+            <div class="cta-features">
+                <span>⚡ Instant Download</span>
+                <span>🖨️ Print Unlimited</span>
+                <span>💯 30-Day Guarantee</span>
+                <span>🔍 Hundreds of Puzzles</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 <a href="#">Word Search Puzzle Book</a> — Made with ❤️ for puzzle lovers</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        // ===== Theme Toggle =====
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+            toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+            toggle.addEventListener('click', function() {
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
+        })();
+
+        // ===== Scroll Animations =====
+        (function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Initially show already visible elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.classList.add('visible');
+                }
+            });
+        })();
+
+        // ===== FAQ Toggle =====
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        console.log('🔍 Word Search Puzzle Book landing page loaded!');
+    </script>
+</body>
+</html>
