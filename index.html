@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>aciqpu — Premium Digital Product</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        /* ===== Custom Styles ===== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --accent: #6c5ce7;
+            --accent-hover: #5a4bd1;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --gradient-start: #6c5ce7;
+            --gradient-end: #a855f7;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f1a;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #f0f0f5;
+            --text-secondary: #b0b0c8;
+            --card-bg: #1a1a2e;
+            --border-color: #2a2a4a;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --gradient-start: #8b7cf7;
+            --gradient-end: #c084fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, var(--gradient-start) 0%, transparent 60%),
+                radial-gradient(circle at 70% 80%, var(--gradient-end) 0%, transparent 60%);
+            opacity: 0.08;
+            animation: floatBg 20s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes floatBg {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(5%, 5%) rotate(5deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            max-width: 480px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-cover {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #6c5ce7, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-cover::after {
+            content: '✨';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .product-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 16px 0 8px;
+            color: var(--text-primary);
+        }
+
+        .product-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        /* ===== Buy Button ===== */
+        .buy-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(108, 92, 231, 0.3);
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(108, 92, 231, 0.4);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== Features ===== */
+        .features {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+        }
+
+        /* ===== Testimonials ===== */
+        .testimonials {
+            padding: 80px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .testimonial-item {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-item .stars {
+            color: #fbbf24;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-item blockquote {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-item .author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 48px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+
+        .faq-answer {
+            padding: 0 24px 20px;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question .toggle {
+            transform: rotate(180deg);
+        }
+
+        .toggle {
+            transition: transform 0.3s ease;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Scroll Animations ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text .subtitle {
+                margin: 0 auto 32px;
+            }
+
+            .product-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 60px 16px;
+            }
+
+            .product-card {
+                padding: 20px;
+            }
+
+            .product-price {
+                font-size: 2rem;
+            }
+
+            .features-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Theme Toggle ===== -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+    </button>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text fade-in">
+                <span style="display:inline-block;background:var(--accent);color:white;padding:4px 16px;border-radius:20px;font-size:0.875rem;font-weight:600;margin-bottom:16px;">
+                    ⚡ Premium Digital Product
+                </span>
+                <h1>aciqpu</h1>
+                <p class="subtitle" data-gumroad-field="description">
+                    Unlock next-level capabilities with aciqpu — the essential tool for creators, builders, and innovators.
+                </p>
+
+                <!-- Trust badges -->
+                <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:32px;">
+                    <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);">
+                        <span style="font-size:1.5rem;">⭐</span> 4.9/5
+                    </span>
+                    <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);">
+                        <span style="font-size:1.5rem;">👥</span> 10k+ users
+                    </span>
+                    <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);">
+                        <span style="font-size:1.5rem;">🛡️</span> Lifetime access
+                    </span>
+                </div>
+            </div>
+
+            <div class="hero-image fade-in">
+                <div class="product-card">
+                    <div class="product-cover">
+                        aciqpu
+                    </div>
+
+                    <div data-gumroad-field="name" style="font-size:1.5rem;font-weight:700;">
+                        aciqpu
+                    </div>
+
+                    <div class="product-price" data-gumroad-field="price">
+                        $<span id="priceDisplay">29.00</span>
+                        <small>USD</small>
+                    </div>
+
+                    <p class="product-description">
+                        One-time payment · Instant access · Lifetime updates
+                    </p>
+
+                    <!-- ===== BUY BUTTON (data-gumroad-action="buy") ===== -->
+                    <a data-gumroad-action="buy" class="buy-btn" id="mainBuyBtn">
+                        🚀 I want this!
+                    </a>
+
+                    <div style="margin-top:16px;font-size:0.875rem;color:var(--text-secondary);text-align:center;">
+                        🔒 Secure checkout · 30-day money-back guarantee
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features ===== -->
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
+                Why choose aciqpu?
+            </h2>
+            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+                Everything you need to succeed, all in one powerful package.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed and performance. Get results in milliseconds, not seconds.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your data stays yours. Enterprise-grade encryption and privacy by design.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Design</h3>
+                    <p>Elegant, intuitive, and crafted with care. A joy to use every single day.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Lifetime Updates</h3>
+                    <p>One payment, forever updates. We're committed to making it better every day.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Community</h3>
+                    <p>Join thousands of creators worldwide. Share, learn, and grow together.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">💎</div>
+                    <h3>Premium Quality</h3>
+                    <p>Built with the highest standards. Tested, refined, and ready for production.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
+                What our customers say
+            </h2>
+            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+                Real feedback from real people who love aciqpu.
+            </p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-item fade-in">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"aciqpu completely transformed my workflow. I can't imagine going back to how I worked before."</blockquote>
+                    <div class="author">— Sarah J., Product Designer</div>
+                </div>
+                <div class="testimonial-item fade-in">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"The best investment I've made this year. Simple, powerful, and incredibly well-designed."</blockquote>
+                    <div class="author">— Mike R., Developer</div>
+                </div>
+                <div class="testimonial-item fade-in">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"I recommend aciqpu to everyone I know. It's a game-changer for creators and builders alike."</blockquote>
+                    <div class="author">— Emma W., Entrepreneur</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq">
+        <div class="container">
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
+                Frequently Asked Questions
+            </h2>
+            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+                Quick answers to the most common questions.
+            </p>
+
+            <div class="faq-grid">
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is aciqpu?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        aciqpu is a premium digital product designed to help creators, builders, and innovators work smarter and faster. It includes everything you need to elevate your projects.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I access my purchase?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Immediately after purchase, you'll receive a download link and access instructions via email. You can also find it in your Gumroad library.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is there a money-back guarantee?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We offer a 30-day money-back guarantee. If you're not completely satisfied, we'll refund your purchase—no questions asked.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Will I get updates?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! Your purchase includes lifetime updates. We're constantly improving aciqpu with new features and enhancements.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA Section ===== -->
+    <section style="padding:80px 20px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:white;">
+        <div class="container" style="text-align:center;">
+            <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
+                Ready to get started?
+            </h2>
+            <p style="font-size:1.125rem;max-width:600px;margin:0 auto 32px;opacity:0.9;">
+                Join thousands of satisfied customers. Get aciqpu today and start building something amazing.
+            </p>
+            <a data-gumroad-action="buy" class="buy-btn" style="display:inline-block;width:auto;background:white;color:var(--gradient-start);box-shadow:0 4px 24px rgba(0,0,0,0.2);">
+                🚀 Get aciqpu now
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p style="margin-bottom:8px;">
+                © 2026 <a href="#">aciqpu</a> — Built with ❤️
+            </p>
+            <p style="font-size:0.875rem;">
+                <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Support</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        // ===== Theme Toggle =====
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+            toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+            toggle.addEventListener('click', function() {
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
+        })();
+
+        // ===== Scroll Animations =====
+        (function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Initially show already visible elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.classList.add('visible');
+                }
+            });
+        })();
+
+        // ===== FAQ Toggle =====
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close all others
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // ===== Price Display =====
+        // Gumroad will interpolate this via data-gumroad-field="price"
+        // We'll keep the price display in sync with the actual price
+        (function() {
+            const priceElement = document.querySelector('[data-gumroad-field="price"]');
+            if (priceElement) {
+                // The actual price will be filled by Gumroad server-side
+                // We'll just listen for any changes
+                const observer = new MutationObserver(() => {
+                    const priceText = priceElement.textContent.trim();
+                    const match = priceText.match(/[\d.]+/);
+                    if (match) {
+                        const display = document.getElementById('priceDisplay');
+                        if (display) {
+                            display.textContent = match[0];
+                        }
+                    }
+                });
+                observer.observe(priceElement, { childList: true, characterData: true, subtree: true });
+            }
+        })();
+
+        console.log('🚀 aciqpu landing page loaded successfully');
+        console.log('💡 Buy buttons use data-gumroad-action="buy" for Gumroad checkout');
+    </script>
+</body>
+</html>
