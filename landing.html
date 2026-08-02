@@ -9,51 +9,77 @@
     <style>
         /* ===== Custom Styles ===== */
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #fef9f5;
-            --text-primary: #1a1a2e;
-            --text-secondary: #4a4a6a;
-            --accent: #f59e0b;
-            --accent-hover: #d97706;
+            --bg-primary: #fcf9f5;
+            --bg-secondary: #f8f4ee;
+            --text-primary: #2d3748;
+            --text-secondary: #5a6a7a;
+            --text-muted: #8a9aa8;
+            --yellow: #e8b84c;
+            --yellow-soft: #f5e6b8;
+            --orange: #e8a84c;
+            --orange-soft: #f5dec8;
+            --teal: #6ecfc7;
+            --teal-soft: #d4f0ed;
+            --blue: #8ac0ee;
+            --blue-soft: #dceaf5;
+            --purple: #b088c4;
+            --purple-soft: #ede0f5;
+            --pink: #e8a0b8;
+            --pink-soft: #f5dce4;
             --card-bg: #ffffff;
-            --border-color: #fde68a;
-            --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            --gradient-start: #f59e0b;
-            --gradient-end: #f97316;
-            --kid-color: #34d399;
+            --border-color: #ede8e0;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.10);
+            --gradient-start: #e8b84c;
+            --gradient-end: #e8a84c;
+            --radius: 20px;
         }
 
         [data-theme="dark"] {
-            --bg-primary: #0f0f1a;
-            --bg-secondary: #1a1a2e;
-            --text-primary: #f0f0f5;
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16162a;
+            --text-primary: #e8e8f0;
             --text-secondary: #b0b0c8;
-            --card-bg: #1a1a2e;
-            --border-color: #2a2a4a;
-            --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-            --gradient-start: #fbbf24;
-            --gradient-end: #f59e0b;
+            --text-muted: #7878a0;
+            --card-bg: #222240;
+            --border-color: #333358;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.4);
+            --yellow: #d4a84c;
+            --yellow-soft: #2a2418;
+            --orange: #d4984c;
+            --orange-soft: #2a2018;
+            --teal: #5ab8b0;
+            --teal-soft: #182a28;
+            --blue: #6aacd8;
+            --blue-soft: #18222a;
+            --purple: #9878b0;
+            --purple-soft: #22182a;
+            --pink: #d088a0;
+            --pink-soft: #2a1820;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         /* ===== Theme Toggle ===== */
@@ -63,22 +89,23 @@
             right: 20px;
             z-index: 1000;
             background: var(--card-bg);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 22px;
+            font-size: 20px;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1);
-            border-color: var(--accent);
+            transform: scale(1.05);
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-hover);
         }
 
         /* ===== Hero Section ===== */
@@ -90,20 +117,31 @@
             padding: 80px 20px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(145deg, var(--bg-primary), var(--bg-secondary));
         }
 
         .hero::before {
-            content: '🌈 🎨 ✏️ 📚 🖍️';
+            content: '';
             position: absolute;
-            font-size: 12rem;
-            opacity: 0.05;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-10deg);
+            top: -50%;
+            right: -30%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--yellow-soft) 0%, transparent 70%);
+            opacity: 0.4;
             pointer-events: none;
-            white-space: nowrap;
-            letter-spacing: 60px;
-            font-weight: 300;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--blue-soft) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -117,11 +155,16 @@
         }
 
         .hero-text h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.15;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--yellow), var(--orange), var(--teal), var(--blue), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -129,42 +172,66 @@
 
         .hero-text .age-badge {
             display: inline-block;
-            background: var(--accent);
+            background: var(--yellow);
             color: white;
             padding: 6px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 700;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
             margin-bottom: 16px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .hero-text .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             margin-bottom: 24px;
             max-width: 500px;
-            font-weight: 500;
+            font-weight: 400;
+            line-height: 1.7;
         }
 
         .hero-text .features-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 24px 0 32px;
+            gap: 10px;
+            margin: 20px 0 28px;
         }
 
         .hero-text .features-list li {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
             list-style: none;
+            padding: 6px 0;
         }
 
         .hero-text .features-list li span {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: var(--card-bg);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
         }
 
         .hero-image {
@@ -175,114 +242,124 @@
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 32px;
-            padding: 32px;
+            border-radius: var(--radius);
+            padding: 28px;
             box-shadow: var(--shadow);
-            border: 2px solid var(--border-color);
-            max-width: 480px;
+            border: 1px solid var(--border-color);
+            max-width: 440px;
             width: 100%;
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .product-card:hover {
             transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
         }
 
         .product-cover {
             width: 100%;
             aspect-ratio: 16/10;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #fbbf24, #f97316, #34d399);
+            border-radius: 16px;
+            background-image: url('https://public-files.gumroad.com/485of91qu2l4lhl11v299m81eq83');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
+            min-height: 180px;
+        }
+
+        .product-cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(252, 251, 251, 0.12);
+            display: flex;
             flex-direction: column;
-            gap: 8px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            padding: 20px;
         }
 
-        .product-cover .cover-text {
-            font-size: 1.8rem;
+        .product-cover-overlay .cover-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 2px;
+        }
+
+        .product-cover-overlay .cover-text {
+            font-size: 1.6rem;
             letter-spacing: 2px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
 
-        .product-cover .cover-sub {
-            font-size: 1rem;
+        .product-cover-overlay .cover-sub {
+            font-size: 0.95rem;
             opacity: 0.9;
             font-weight: 400;
-        }
-
-        .product-cover::after {
-            content: '✏️ 🎨 📖';
-            position: absolute;
-            font-size: 5rem;
-            opacity: 0.15;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            letter-spacing: 20px;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
 
         .product-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2px;
             color: var(--text-primary);
         }
 
         .product-author {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             margin-bottom: 12px;
         }
 
         .product-price {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin: 12px 0 4px;
+            margin: 8px 0 4px;
             color: var(--text-primary);
         }
 
         .product-price small {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 400;
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
 
         .product-description {
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
         }
 
         /* ===== Buy Button ===== */
         .buy-btn {
             display: inline-block;
             width: 100%;
-            padding: 16px 32px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 16px 28px;
+            background: var(--yellow);
             color: white;
             border: none;
-            border-radius: 16px;
-            font-size: 1.125rem;
-            font-weight: 700;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
             text-decoration: none;
-            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
-            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(232, 184, 76, 0.3);
+            letter-spacing: 0.3px;
         }
 
         .buy-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 8px 28px rgba(232, 184, 76, 0.35);
+            background: var(--orange);
         }
 
         .buy-btn:active {
@@ -290,35 +367,70 @@
         }
 
         .buy-btn-secondary {
-            background: white;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+            background: var(--card-bg);
+            color: var(--yellow);
+            border: 2px solid var(--yellow);
             box-shadow: none;
         }
 
         .buy-btn-secondary:hover {
-            background: var(--accent);
+            background: var(--yellow);
             color: white;
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+        }
+
+        .secure-badge {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 6px;
+            border-radius: 10px;
+            background: var(--bg-secondary);
         }
 
         /* ===== Features Section ===== */
         .features-section {
-            padding: 80px 0;
+            padding: 72px 0;
             background: var(--bg-secondary);
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 32px;
-            margin-top: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
         }
 
         .feature-item {
             background: var(--card-bg);
-            padding: 32px;
-            border-radius: 20px;
+            padding: 28px 24px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             text-align: center;
@@ -326,132 +438,184 @@
 
         .feature-item:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--yellow);
         }
 
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            display: block;
         }
 
         .feature-item h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
         }
 
         .feature-item p {
             color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ===== Preview Gallery ===== */
+        .preview-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: default;
+        }
+
+        .preview-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--yellow);
+        }
+
+        .preview-item img {
+            transition: transform 0.4s ease;
+        }
+
+        .preview-item:hover img {
+            transform: scale(1.02);
         }
 
         /* ===== Who It's For ===== */
         .audience-section {
-            padding: 80px 0;
+            padding: 72px 0;
+            background: var(--bg-primary);
         }
 
         .audience-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 8px;
         }
 
         .audience-item {
             background: var(--card-bg);
-            padding: 24px;
+            padding: 24px 20px;
             border-radius: 16px;
             border: 1px solid var(--border-color);
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .audience-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--teal);
         }
 
         .audience-item .emoji {
-            font-size: 3rem;
+            font-size: 2.8rem;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .audience-item h4 {
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 4px;
+            color: var(--text-primary);
+            font-size: 1rem;
         }
 
         .audience-item p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         /* ===== Testimonials ===== */
         .testimonials {
-            padding: 80px 0;
+            padding: 72px 0;
             background: var(--bg-secondary);
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 32px;
-            margin-top: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
         }
 
         .testimonial-item {
             background: var(--card-bg);
-            padding: 28px;
-            border-radius: 20px;
+            padding: 24px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
 
         .testimonial-item .stars {
-            color: #fbbf24;
-            font-size: 1.25rem;
-            margin-bottom: 12px;
+            color: var(--yellow);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .testimonial-item blockquote {
             color: var(--text-secondary);
             font-style: italic;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .testimonial-item .author {
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-primary);
+            font-size: 0.9rem;
         }
 
         .testimonial-item .role {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
         /* ===== FAQ ===== */
         .faq {
-            padding: 80px 0;
+            padding: 72px 0;
+            background: var(--bg-primary);
         }
 
         .faq-grid {
-            max-width: 800px;
-            margin: 48px auto 0;
+            max-width: 740px;
+            margin: 8px auto 0;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
         }
 
         .faq-item {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--yellow);
         }
 
         .faq-question {
-            padding: 20px 24px;
-            font-weight: 700;
+            padding: 18px 22px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             user-select: none;
+            color: var(--text-primary);
+            font-size: 0.95rem;
         }
 
         .faq-question:hover {
@@ -459,9 +623,11 @@
         }
 
         .faq-answer {
-            padding: 0 24px 20px;
+            padding: 0 22px 18px;
             color: var(--text-secondary);
             display: none;
+            font-size: 0.9rem;
+            line-height: 1.7;
         }
 
         .faq-item.active .faq-answer {
@@ -474,36 +640,118 @@
 
         .toggle {
             transition: transform 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 72px 20px;
+            background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--yellow-soft) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .cta-section p {
+            font-size: 1.05rem;
+            max-width: 560px;
+            margin: 0 auto 28px;
+            color: var(--text-secondary);
+        }
+
+        .cta-section .buy-btn {
+            display: inline-block;
+            width: auto;
+            padding: 16px 44px;
+            font-size: 1.1rem;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cta-features span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* ===== Footer ===== */
         .footer {
-            padding: 40px 0;
+            padding: 32px 0;
             text-align: center;
             border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            font-size: 0.85rem;
         }
 
         .footer a {
-            color: var(--accent);
+            color: var(--text-secondary);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer a:hover {
-            text-decoration: underline;
+            color: var(--yellow);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 6px;
         }
 
         /* ===== Scroll Animations ===== */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
 
         /* ===== Responsive ===== */
         @media (max-width: 968px) {
@@ -517,11 +765,15 @@
             }
 
             .hero-text .subtitle {
-                margin: 0 auto 24px;
+                margin: 0 auto 20px;
             }
 
             .hero-text .features-list {
                 align-items: center;
+            }
+
+            .trust-badges {
+                justify-content: center;
             }
 
             .product-card {
@@ -539,7 +791,7 @@
             }
 
             .product-price {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .features-grid,
@@ -548,8 +800,40 @@
                 grid-template-columns: 1fr;
             }
 
-            .product-cover .cover-text {
-                font-size: 1.4rem;
+            .product-cover-overlay .cover-text {
+                font-size: 1.3rem;
+            }
+
+            .product-cover-overlay .cover-emoji {
+                font-size: 2.2rem;
+            }
+
+            .cta-section .buy-btn {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+
+            .cta-features {
+                gap: 12px;
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .product-cover {
+                min-height: 140px;
+            }
+
+            .product-cover-overlay .cover-text {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -565,50 +849,48 @@
         <div class="container hero-content">
             <div class="hero-text fade-in">
                 <span class="age-badge">👶 Ages 3-5</span>
-                <h1 data-gumroad-field="name">ABC Adventure for little hands</h1>
+                <h1>
+                    <span data-gumroad-field="name">ABC Adventure</span><br />
+                    for little hands
+                </h1>
                 <p class="subtitle" data-gumroad-field="description">
                     Give your little learner a head start with this fun, printable worksheet pack designed specifically for children ages 3–5.
                 </p>
 
                 <ul class="features-list">
-                    <li><span>✏️</span> Develops fine motor skills through tracing and drawing</li>
-                    <li><span>🔢</span> Introduces numbers and basic counting concepts</li>
+                    <li><span>✏️</span> Trace · Learn · Color — all in one!</li>
                     <li><span>🔤</span> Builds letter recognition and early literacy</li>
-                    <li><span>🎨</span> Keeps kids engaged with colorful, playful designs</li>
-                    <li><span>🖨️</span> Instant download — print as many times as you need at home</li>
+                    <li><span>🎨</span> Engaging, playful designs kids love</li>
+                    <li><span>🖨️</span> Instant download — print unlimited times</li>
                 </ul>
 
-                <!-- Trust badges -->
-                <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
-                    <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.9rem;">
-                        <span style="font-size:1.2rem;">⭐</span> Loved by parents
-                    </span>
-                    <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.9rem;">
-                        <span style="font-size:1.2rem;">👩‍🏫</span> Teacher approved
-                    </span>
-                    <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.9rem;">
-                        <span style="font-size:1.2rem;">🏠</span> Homeschool ready
-                    </span>
+                <div class="trust-badges">
+                    <span>⭐ Loved by parents</span>
+                    <span>👩‍🏫 Teacher approved</span>
+                    <span>🏠 Homeschool ready</span>
                 </div>
             </div>
 
-            <div class="hero-image fade-in">
+            <div class="hero-image fade-in delay-2">
                 <div class="product-card">
                     <div class="product-cover">
-                        <div class="cover-text">ABC Adventure</div>
-                        <div class="cover-sub">for little hands</div>
+                        <div class="product-cover-overlay">
+                            <div class="cover-emoji"></div>
+                            <div class="cover-text"></div>
+                            <div class="cover-sub"></div>
+                        </div>
                     </div>
 
                     <div class="product-name" data-gumroad-field="name">ABC Adventure for little hands</div>
-                    <div class="product-author">by <span data-gumroad-field="name">Sarora Ahmed</span></div>
+                    <div class="product-author">by Sarah Abdeldayem</div>
 
                     <div class="product-price" data-gumroad-field="price">
-                        $<span id="priceDisplay">39.21</span>
+                        $<span id="priceDisplay">5.00</span>
                         <small>USD</small>
                     </div>
 
                     <p class="product-description">
-                        Instant download · Print unlimited times · Ages 3-5
+                        ⚡ Instant Download · 🖨️ Print Unlimited · 📄 185 Pages
                     </p>
 
                     <!-- ===== BUY BUTTON ===== -->
@@ -616,44 +898,250 @@
                         🚀 Get ABC Adventure Now
                     </a>
 
-                    <div style="margin-top:14px;font-size:0.8rem;color:var(--text-secondary);text-align:center;">
-                        🔒 Secure checkout · Instant access
+                    <div class="secure-badge">
+                        🔒 Secure checkout · 30-day guarantee
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== PREVIEW GALLERY ===== -->
+    <section class="preview-section" style="padding: 72px 0; background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-label">📸 Sneak Peek</div>
+            <h2 class="section-title">See What's Inside</h2>
+            <p class="section-subtitle">
+                Here's a real look at the worksheets your child will enjoy — fun, colorful, and educational!
+            </p>
+
+            <div class="preview-grid" style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 24px;
+                margin-top: 8px;
+            ">
+                <!-- IMAGE 1: Duck Coloring -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/pfvng6da4h0fc4eyyqeuods0qq72"
+                            alt="Color the picture - Duck coloring worksheet"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                        🦆 Color the Picture — Duck
+                    </p>
+                </div>
+
+                <!-- IMAGE 2: Letter Ee -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/xy46c1h8ncsnpaeu74zywixz80w4"
+                            alt="e is for elephant - Letter recognition worksheet"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                        🔤 e is for Elephant — Letter Ee
+                    </p>
+                </div>
+
+                <!-- IMAGE 3: Bees Tracing -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/vhiqcypy5oxnmx186clqk8yaxkni"
+                            alt="Bees tracing activity - Fine motor skills worksheet"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                        🐝 Tracing — Help Bees Reach Flowers
+                    </p>
+                </div>
+
+                <!-- IMAGE 4: Trace the Shapes -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/pqkf17hugnlueog13sw2baslqtmg"
+                            alt="Trace the shapes - Shape recognition worksheet"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                        ⬛ Trace the Shapes
+                    </p>
+                </div>
+
+                <!-- IMAGE 5: Letter Writing Practice -->
+                <div class="preview-item" style="
+                    background: var(--card-bg);
+                    border-radius: 16px;
+                    padding: 16px;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                ">
+                    <div style="
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: #f5f0ea;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img 
+                            src="https://public-files.gumroad.com/22pzy4s5l9z4tm2s9qx0j1t50gju"
+                            alt="Letter writing practice - Handwriting worksheet"
+                            style="width: 100%; height: 100%; object-fit: contain;"
+                            loading="lazy"
+                        />
+                    </div>
+                    <p style="
+                        margin-top: 12px;
+                        font-size: 0.85rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    ">
+                        ✍️ Letter Writing Practice
+                    </p>
+                </div>
+            </div>
+             <!-- Trust note -->
+            <p style="
+                text-align: center;
+                margin-top: 32px;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+            ">
+                ⭐ 5 real worksheets from the full 185-page pack — <strong style="color: var(--yellow);">instant download!</strong>
+            </p>
+            </div>
+    </section>
+
     <!-- ===== Who It's For ===== -->
     <section class="audience-section">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
-                🎯 Who is this for?
-            </h2>
-            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
-                Perfect for parents, homeschoolers, and preschool teachers looking for ready-to-use activities.
+            <div class="section-label">Who is this for?</div>
+            <h2 class="section-title">Perfect for every little learner</h2>
+            <p class="section-subtitle">
+                Designed for parents, homeschoolers, and preschool teachers looking for ready-to-use activities.
             </p>
 
             <div class="audience-grid">
                 <div class="audience-item fade-in">
                     <span class="emoji">👨‍👩‍👧</span>
                     <h4>Parents</h4>
-                    <p>Engaging activities for quality time with your little one at home</p>
+                    <p>Quality learning time at home</p>
                 </div>
-                <div class="audience-item fade-in">
+                <div class="audience-item fade-in delay-1">
                     <span class="emoji">🏠</span>
                     <h4>Homeschoolers</h4>
-                    <p>Ready-to-use worksheets that make learning fun and structured</p>
+                    <p>Structured, fun worksheets</p>
                 </div>
-                <div class="audience-item fade-in">
+                <div class="audience-item fade-in delay-2">
                     <span class="emoji">👩‍🏫</span>
                     <h4>Preschool Teachers</h4>
-                    <p>Perfect for classroom centers, morning work, or take-home practice</p>
+                    <p>Classroom-ready activities</p>
                 </div>
-                <div class="audience-item fade-in">
+                <div class="audience-item fade-in delay-3">
                     <span class="emoji">🎁</span>
                     <h4>Gift Givers</h4>
-                    <p>A thoughtful, educational gift for the little learners in your life</p>
+                    <p>Thoughtful educational gifts</p>
                 </div>
             </div>
         </div>
@@ -662,74 +1150,67 @@
     <!-- ===== Features Section ===== -->
     <section class="features-section">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
-                ✨ What's Inside?
-            </h2>
-            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+            <div class="section-label">What's Inside</div>
+            <h2 class="section-title">Everything your child needs to grow</h2>
+            <p class="section-subtitle">
                 Packed with age-appropriate activities that build essential early skills.
             </p>
 
             <div class="features-grid">
                 <div class="feature-item fade-in">
-                    <div class="feature-icon">✏️</div>
-                    <h3>Tracing & Drawing</h3>
-                    <p>Develop fine motor skills and hand-eye coordination through fun tracing activities.</p>
+                    <span class="feature-icon">✏️</span>
+                    <h3>Trace & Learn</h3>
+                    <p>Develop fine motor skills and hand-eye coordination.</p>
                 </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-icon">🔤</div>
+                <div class="feature-item fade-in delay-1">
+                    <span class="feature-icon">🔤</span>
                     <h3>Letter Recognition</h3>
-                    <p>Build early literacy with engaging letter recognition and phonics activities.</p>
+                    <p>Build early literacy with engaging phonics activities.</p>
                 </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-icon">🔢</div>
-                    <h3>Numbers & Counting</h3>
-                    <p>Introduce basic math concepts with counting exercises and number activities.</p>
+                <div class="feature-item fade-in delay-3">
+                    <span class="feature-icon">🎨</span>
+                    <h3>Coloring Fun</h3>
+                    <p>Playful designs that make learning enjoyable.</p>
                 </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Coloring & Matching</h3>
-                    <p>Keep kids engaged with colorful, playful designs that make learning fun.</p>
+                <div class="feature-item fade-in delay-4">
+                    <span class="feature-icon">🖨️</span>
+                    <h3>Print Unlimited</h3>
+                    <p>Print as many copies as you need, anytime.</p>
                 </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-icon">🖨️</div>
-                    <h3>Print Unlimited Times</h3>
-                    <p>Instant download — print as many copies as you need for home or classroom use.</p>
-                </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-icon">📚</div>
-                    <h3>Age-Appropriate</h3>
-                    <p>Specifically designed for children ages 3-5 to build confidence and skills.</p>
+                <div class="feature-item fade-in delay-4">
+                    <span class="feature-icon">📚</span>
+                    <h3>185 Pages</h3>
+                    <p>Comprehensive activities for ages 3-5.</p>
                 </div>
             </div>
         </div>
     </section>
-
+        
     <!-- ===== Testimonials ===== -->
     <section class="testimonials">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
-                💬 What Parents Are Saying
-            </h2>
-            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+            <div class="section-label">Testimonials</div>
+            <h2 class="section-title">What parents are saying</h2>
+            <p class="section-subtitle">
                 Real feedback from real families who love ABC Adventure.
             </p>
 
             <div class="testimonials-grid">
                 <div class="testimonial-item fade-in">
                     <div class="stars">★★★★★</div>
-                    <blockquote>"My 4-year-old absolutely loves these worksheets! She asks to do them every day. The tracing activities have really helped her fine motor skills."</blockquote>
+                    <blockquote>"My 4-year-old absolutely loves these worksheets! The tracing activities have really helped her fine motor skills."</blockquote>
                     <div class="author">— Sarah M.</div>
                     <div class="role">Mom of 2</div>
                 </div>
-                <div class="testimonial-item fade-in">
+                <div class="testimonial-item fade-in delay-1">
                     <div class="stars">★★★★★</div>
-                    <blockquote>"Perfect for our homeschool routine. The activities are engaging, educational, and my son actually enjoys them. Highly recommend!"</blockquote>
+                    <blockquote>"Perfect for our homeschool routine. Engaging, educational, and my son actually enjoys them. Highly recommend!"</blockquote>
                     <div class="author">— Jessica R.</div>
                     <div class="role">Homeschooling Mom</div>
                 </div>
-                <div class="testimonial-item fade-in">
+                <div class="testimonial-item fade-in delay-2">
                     <div class="stars">★★★★★</div>
-                    <blockquote>"I use these in my preschool classroom and they're a hit! The kids love the colorful designs and I love how they build essential skills."</blockquote>
+                    <blockquote>"I use these in my preschool classroom and they're a hit! The kids love the colorful designs."</blockquote>
                     <div class="author">— Mrs. Thompson</div>
                     <div class="role">Preschool Teacher</div>
                 </div>
@@ -740,10 +1221,9 @@
     <!-- ===== FAQ ===== -->
     <section class="faq">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
-                ❓ Frequently Asked Questions
-            </h2>
-            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">
                 Quick answers to common questions about ABC Adventure.
             </p>
 
@@ -781,7 +1261,7 @@
                         <span class="toggle">▼</span>
                     </div>
                     <div class="faq-answer">
-                        These activities develop fine motor skills (tracing, drawing), early literacy (letter recognition), basic math (numbers, counting), and critical thinking through matching and coloring activities.
+                        These activities develop fine motor skills (tracing, drawing), early literacy (letter recognition), and shape recognition.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -798,32 +1278,33 @@
     </section>
 
     <!-- ===== CTA Section ===== -->
-    <section style="padding:80px 20px;background:linear-gradient(135deg,#fbbf24,#f97316,#34d399);color:white;">
-        <div class="container" style="text-align:center;">
-            <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
-                🎉 Ready to Start the Adventure?
-            </h2>
-            <p style="font-size:1.125rem;max-width:600px;margin:0 auto 32px;opacity:0.95;">
+    <section class="cta-section">
+        <div class="container">
+            <h2>🎉 Ready to Start the Adventure?</h2>
+            <p>
                 Give your little learner a head start with fun, engaging activities they'll actually enjoy!
             </p>
-            <a data-gumroad-action="buy" class="buy-btn" style="display:inline-block;width:auto;background:white;color:#f59e0b;box-shadow:0 4px 24px rgba(0,0,0,0.2);">
-                🚀 Get ABC Adventure Now
+            <a data-gumroad-action="buy" class="buy-btn">
+                🚀 Get ABC Adventure Now — $5
             </a>
-            <p style="margin-top:16px;font-size:0.9rem;opacity:0.8;">
-                ⚡ Instant Download · 🖨️ Print Unlimited Times · 💯 30-Day Guarantee
-            </p>
+            <div class="cta-features">
+                <span>⚡ Instant Download</span>
+                <span>🖨️ Print Unlimited</span>
+                <span>💯 30-Day Guarantee</span>
+                <span>📄 185 Pages</span>
+            </div>
         </div>
     </section>
 
     <!-- ===== Footer ===== -->
     <footer class="footer">
         <div class="container">
-            <p style="margin-bottom:8px;">
-                © 2026 <a href="#">ABC Adventure</a> — Made with ❤️ for little learners
-            </p>
-            <p style="font-size:0.85rem;">
-                <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Contact</a>
-            </p>
+            <p>© 2026 <a href="#">ABC Adventure</a> — Made with ❤️ for little learners</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
         </div>
     </footer>
 
@@ -854,7 +1335,7 @@
                         entry.target.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
