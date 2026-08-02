@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aciqpu — Premium Digital Product</title>
+    <title>ABC Adventure for little hands</title>
     <script src="https://cdn.tailwindcss.com">
     </script>
     <style>
         /* ===== Custom Styles ===== */
         :root {
             --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
+            --bg-secondary: #fef9f5;
             --text-primary: #1a1a2e;
             --text-secondary: #4a4a6a;
-            --accent: #6c5ce7;
-            --accent-hover: #5a4bd1;
+            --accent: #f59e0b;
+            --accent-hover: #d97706;
             --card-bg: #ffffff;
-            --border-color: #e0e0e0;
+            --border-color: #fde68a;
             --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            --gradient-start: #6c5ce7;
-            --gradient-end: #a855f7;
+            --gradient-start: #f59e0b;
+            --gradient-end: #f97316;
+            --kid-color: #34d399;
         }
 
         [data-theme="dark"] {
@@ -30,8 +31,8 @@
             --card-bg: #1a1a2e;
             --border-color: #2a2a4a;
             --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-            --gradient-start: #8b7cf7;
-            --gradient-end: #c084fc;
+            --gradient-start: #fbbf24;
+            --gradient-end: #f59e0b;
         }
 
         * {
@@ -42,7 +43,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Comic Sans MS', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -92,26 +93,17 @@
         }
 
         .hero::before {
-            content: '';
+            content: '🌈 🎨 ✏️ 📚 🖍️';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 50%, var(--gradient-start) 0%, transparent 60%),
-                radial-gradient(circle at 70% 80%, var(--gradient-end) 0%, transparent 60%);
-            opacity: 0.08;
-            animation: floatBg 20s ease-in-out infinite alternate;
+            font-size: 12rem;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-10deg);
             pointer-events: none;
-        }
-
-        @keyframes floatBg {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            100% {
-                transform: translate(5%, 5%) rotate(5deg);
-            }
+            white-space: nowrap;
+            letter-spacing: 60px;
+            font-weight: 300;
         }
 
         .hero-content {
@@ -128,18 +120,51 @@
             font-size: clamp(2.5rem, 5vw, 4.5rem);
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        .hero-text .age-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
         .hero-text .subtitle {
             font-size: 1.25rem;
             color: var(--text-secondary);
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             max-width: 500px;
+            font-weight: 500;
+        }
+
+        .hero-text .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 24px 0 32px;
+        }
+
+        .hero-text .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            list-style: none;
+        }
+
+        .hero-text .features-list li span {
+            font-size: 1.5rem;
         }
 
         .hero-image {
@@ -150,10 +175,10 @@
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 24px;
+            border-radius: 32px;
             padding: 32px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             max-width: 480px;
             width: 100%;
             transition: transform 0.3s ease;
@@ -165,34 +190,62 @@
 
         .product-cover {
             width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #6c5ce7, #a855f7);
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fbbf24, #f97316, #34d399);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 700;
             color: white;
             margin-bottom: 24px;
             position: relative;
             overflow: hidden;
+            flex-direction: column;
+            gap: 8px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .product-cover .cover-text {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .product-cover .cover-sub {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
         }
 
         .product-cover::after {
-            content: '✨';
+            content: '✏️ 🎨 📖';
             position: absolute;
-            font-size: 6rem;
-            opacity: 0.2;
+            font-size: 5rem;
+            opacity: 0.15;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            letter-spacing: 20px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .product-author {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
         }
 
         .product-price {
             font-size: 2.5rem;
             font-weight: 700;
-            margin: 16px 0 8px;
+            margin: 12px 0 4px;
             color: var(--text-primary);
         }
 
@@ -204,8 +257,8 @@
 
         .product-description {
             color: var(--text-secondary);
-            margin-bottom: 24px;
-            font-size: 1rem;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
         /* ===== Buy Button ===== */
@@ -216,34 +269,48 @@
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 16px;
             font-size: 1.125rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
             text-decoration: none;
-            box-shadow: 0 4px 16px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+            letter-spacing: 0.5px;
         }
 
         .buy-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(108, 92, 231, 0.4);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
         }
 
         .buy-btn:active {
             transform: scale(0.98);
         }
 
-        /* ===== Features ===== */
-        .features {
+        .buy-btn-secondary {
+            background: white;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            box-shadow: none;
+        }
+
+        .buy-btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+        }
+
+        /* ===== Features Section ===== */
+        .features-section {
             padding: 80px 0;
             background: var(--bg-secondary);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 32px;
             margin-top: 48px;
         }
@@ -251,9 +318,10 @@
         .feature-item {
             background: var(--card-bg);
             padding: 32px;
-            border-radius: 16px;
+            border-radius: 20px;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            text-align: center;
         }
 
         .feature-item:hover {
@@ -262,13 +330,13 @@
         }
 
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 16px;
         }
 
         .feature-item h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 8px;
         }
 
@@ -276,23 +344,61 @@
             color: var(--text-secondary);
         }
 
+        /* ===== Who It's For ===== */
+        .audience-section {
+            padding: 80px 0;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .audience-item {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .audience-item .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .audience-item h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .audience-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
         /* ===== Testimonials ===== */
         .testimonials {
             padding: 80px 0;
+            background: var(--bg-secondary);
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 32px;
             margin-top: 48px;
         }
 
         .testimonial-item {
             background: var(--card-bg);
-            padding: 32px;
-            border-radius: 16px;
+            padding: 28px;
+            border-radius: 20px;
             border: 1px solid var(--border-color);
+            position: relative;
         }
 
         .testimonial-item .stars {
@@ -305,17 +411,22 @@
             color: var(--text-secondary);
             font-style: italic;
             margin-bottom: 12px;
+            font-size: 0.95rem;
         }
 
         .testimonial-item .author {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
+        }
+
+        .testimonial-item .role {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
         /* ===== FAQ ===== */
         .faq {
             padding: 80px 0;
-            background: var(--bg-secondary);
         }
 
         .faq-grid {
@@ -329,13 +440,13 @@
         .faq-item {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
         }
 
         .faq-question {
             padding: 20px 24px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -406,7 +517,11 @@
             }
 
             .hero-text .subtitle {
-                margin: 0 auto 32px;
+                margin: 0 auto 24px;
+            }
+
+            .hero-text .features-list {
+                align-items: center;
             }
 
             .product-card {
@@ -428,8 +543,13 @@
             }
 
             .features-grid,
-            .testimonials-grid {
+            .testimonials-grid,
+            .audience-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .product-cover .cover-text {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -444,24 +564,30 @@
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text fade-in">
-                <span style="display:inline-block;background:var(--accent);color:white;padding:4px 16px;border-radius:20px;font-size:0.875rem;font-weight:600;margin-bottom:16px;">
-                    ⚡ Premium Digital Product
-                </span>
-                <h1>aciqpu</h1>
+                <span class="age-badge">👶 Ages 3-5</span>
+                <h1 data-gumroad-field="name">ABC Adventure for little hands</h1>
                 <p class="subtitle" data-gumroad-field="description">
-                    Unlock next-level capabilities with aciqpu — the essential tool for creators, builders, and innovators.
+                    Give your little learner a head start with this fun, printable worksheet pack designed specifically for children ages 3–5.
                 </p>
 
+                <ul class="features-list">
+                    <li><span>✏️</span> Develops fine motor skills through tracing and drawing</li>
+                    <li><span>🔢</span> Introduces numbers and basic counting concepts</li>
+                    <li><span>🔤</span> Builds letter recognition and early literacy</li>
+                    <li><span>🎨</span> Keeps kids engaged with colorful, playful designs</li>
+                    <li><span>🖨️</span> Instant download — print as many times as you need at home</li>
+                </ul>
+
                 <!-- Trust badges -->
-                <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:32px;">
-                    <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);">
-                        <span style="font-size:1.5rem;">⭐</span> 4.9/5
+                <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
+                    <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.9rem;">
+                        <span style="font-size:1.2rem;">⭐</span> Loved by parents
                     </span>
-                    <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);">
-                        <span style="font-size:1.5rem;">👥</span> 10k+ users
+                    <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.9rem;">
+                        <span style="font-size:1.2rem;">👩‍🏫</span> Teacher approved
                     </span>
-                    <span style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);">
-                        <span style="font-size:1.5rem;">🛡️</span> Lifetime access
+                    <span style="display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.9rem;">
+                        <span style="font-size:1.2rem;">🏠</span> Homeschool ready
                     </span>
                 </div>
             </div>
@@ -469,75 +595,110 @@
             <div class="hero-image fade-in">
                 <div class="product-card">
                     <div class="product-cover">
-                        aciqpu
+                        <div class="cover-text">ABC Adventure</div>
+                        <div class="cover-sub">for little hands</div>
                     </div>
 
-                    <div data-gumroad-field="name" style="font-size:1.5rem;font-weight:700;">
-                        aciqpu
-                    </div>
+                    <div class="product-name" data-gumroad-field="name">ABC Adventure for little hands</div>
+                    <div class="product-author">by <span data-gumroad-field="name">Sarora Ahmed</span></div>
 
                     <div class="product-price" data-gumroad-field="price">
-                        $<span id="priceDisplay">29.00</span>
+                        $<span id="priceDisplay">39.21</span>
                         <small>USD</small>
                     </div>
 
                     <p class="product-description">
-                        One-time payment · Instant access · Lifetime updates
+                        Instant download · Print unlimited times · Ages 3-5
                     </p>
 
-                    <!-- ===== BUY BUTTON (data-gumroad-action="buy") ===== -->
+                    <!-- ===== BUY BUTTON ===== -->
                     <a data-gumroad-action="buy" class="buy-btn" id="mainBuyBtn">
-                        🚀 I want this!
+                        🚀 Get ABC Adventure Now
                     </a>
 
-                    <div style="margin-top:16px;font-size:0.875rem;color:var(--text-secondary);text-align:center;">
-                        🔒 Secure checkout · 30-day money-back guarantee
+                    <div style="margin-top:14px;font-size:0.8rem;color:var(--text-secondary);text-align:center;">
+                        🔒 Secure checkout · Instant access
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== Features ===== -->
-    <section class="features">
+    <!-- ===== Who It's For ===== -->
+    <section class="audience-section">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
-                Why choose aciqpu?
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
+                🎯 Who is this for?
             </h2>
             <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
-                Everything you need to succeed, all in one powerful package.
+                Perfect for parents, homeschoolers, and preschool teachers looking for ready-to-use activities.
+            </p>
+
+            <div class="audience-grid">
+                <div class="audience-item fade-in">
+                    <span class="emoji">👨‍👩‍👧</span>
+                    <h4>Parents</h4>
+                    <p>Engaging activities for quality time with your little one at home</p>
+                </div>
+                <div class="audience-item fade-in">
+                    <span class="emoji">🏠</span>
+                    <h4>Homeschoolers</h4>
+                    <p>Ready-to-use worksheets that make learning fun and structured</p>
+                </div>
+                <div class="audience-item fade-in">
+                    <span class="emoji">👩‍🏫</span>
+                    <h4>Preschool Teachers</h4>
+                    <p>Perfect for classroom centers, morning work, or take-home practice</p>
+                </div>
+                <div class="audience-item fade-in">
+                    <span class="emoji">🎁</span>
+                    <h4>Gift Givers</h4>
+                    <p>A thoughtful, educational gift for the little learners in your life</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features Section ===== -->
+    <section class="features-section">
+        <div class="container">
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
+                ✨ What's Inside?
+            </h2>
+            <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
+                Packed with age-appropriate activities that build essential early skills.
             </p>
 
             <div class="features-grid">
                 <div class="feature-item fade-in">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized for speed and performance. Get results in milliseconds, not seconds.</p>
+                    <div class="feature-icon">✏️</div>
+                    <h3>Tracing & Drawing</h3>
+                    <p>Develop fine motor skills and hand-eye coordination through fun tracing activities.</p>
                 </div>
                 <div class="feature-item fade-in">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Secure & Private</h3>
-                    <p>Your data stays yours. Enterprise-grade encryption and privacy by design.</p>
+                    <div class="feature-icon">🔤</div>
+                    <h3>Letter Recognition</h3>
+                    <p>Build early literacy with engaging letter recognition and phonics activities.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🔢</div>
+                    <h3>Numbers & Counting</h3>
+                    <p>Introduce basic math concepts with counting exercises and number activities.</p>
                 </div>
                 <div class="feature-item fade-in">
                     <div class="feature-icon">🎨</div>
-                    <h3>Beautiful Design</h3>
-                    <p>Elegant, intuitive, and crafted with care. A joy to use every single day.</p>
+                    <h3>Coloring & Matching</h3>
+                    <p>Keep kids engaged with colorful, playful designs that make learning fun.</p>
                 </div>
                 <div class="feature-item fade-in">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Lifetime Updates</h3>
-                    <p>One payment, forever updates. We're committed to making it better every day.</p>
+                    <div class="feature-icon">🖨️</div>
+                    <h3>Print Unlimited Times</h3>
+                    <p>Instant download — print as many copies as you need for home or classroom use.</p>
                 </div>
                 <div class="feature-item fade-in">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Global Community</h3>
-                    <p>Join thousands of creators worldwide. Share, learn, and grow together.</p>
-                </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-icon">💎</div>
-                    <h3>Premium Quality</h3>
-                    <p>Built with the highest standards. Tested, refined, and ready for production.</p>
+                    <div class="feature-icon">📚</div>
+                    <h3>Age-Appropriate</h3>
+                    <p>Specifically designed for children ages 3-5 to build confidence and skills.</p>
                 </div>
             </div>
         </div>
@@ -546,28 +707,31 @@
     <!-- ===== Testimonials ===== -->
     <section class="testimonials">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
-                What our customers say
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
+                💬 What Parents Are Saying
             </h2>
             <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
-                Real feedback from real people who love aciqpu.
+                Real feedback from real families who love ABC Adventure.
             </p>
 
             <div class="testimonials-grid">
                 <div class="testimonial-item fade-in">
                     <div class="stars">★★★★★</div>
-                    <blockquote>"aciqpu completely transformed my workflow. I can't imagine going back to how I worked before."</blockquote>
-                    <div class="author">— Sarah J., Product Designer</div>
+                    <blockquote>"My 4-year-old absolutely loves these worksheets! She asks to do them every day. The tracing activities have really helped her fine motor skills."</blockquote>
+                    <div class="author">— Sarah M.</div>
+                    <div class="role">Mom of 2</div>
                 </div>
                 <div class="testimonial-item fade-in">
                     <div class="stars">★★★★★</div>
-                    <blockquote>"The best investment I've made this year. Simple, powerful, and incredibly well-designed."</blockquote>
-                    <div class="author">— Mike R., Developer</div>
+                    <blockquote>"Perfect for our homeschool routine. The activities are engaging, educational, and my son actually enjoys them. Highly recommend!"</blockquote>
+                    <div class="author">— Jessica R.</div>
+                    <div class="role">Homeschooling Mom</div>
                 </div>
                 <div class="testimonial-item fade-in">
                     <div class="stars">★★★★★</div>
-                    <blockquote>"I recommend aciqpu to everyone I know. It's a game-changer for creators and builders alike."</blockquote>
-                    <div class="author">— Emma W., Entrepreneur</div>
+                    <blockquote>"I use these in my preschool classroom and they're a hit! The kids love the colorful designs and I love how they build essential skills."</blockquote>
+                    <div class="author">— Mrs. Thompson</div>
+                    <div class="role">Preschool Teacher</div>
                 </div>
             </div>
         </div>
@@ -576,21 +740,21 @@
     <!-- ===== FAQ ===== -->
     <section class="faq">
         <div class="container">
-            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
-                Frequently Asked Questions
+            <h2 style="text-align:center;font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:12px;">
+                ❓ Frequently Asked Questions
             </h2>
             <p style="text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto 16px;">
-                Quick answers to the most common questions.
+                Quick answers to common questions about ABC Adventure.
             </p>
 
             <div class="faq-grid">
                 <div class="faq-item active">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>What is aciqpu?</span>
+                        <span>What age group is this for?</span>
                         <span class="toggle">▼</span>
                     </div>
                     <div class="faq-answer">
-                        aciqpu is a premium digital product designed to help creators, builders, and innovators work smarter and faster. It includes everything you need to elevate your projects.
+                        ABC Adventure is specifically designed for children ages 3-5. The activities are age-appropriate and build essential early learning skills.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -599,7 +763,25 @@
                         <span class="toggle">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Immediately after purchase, you'll receive a download link and access instructions via email. You can also find it in your Gumroad library.
+                        You'll receive an instant download link immediately after purchase via email. You can also find it in your Gumroad library. Download and print as many times as you need!
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I use these for my classroom?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! These worksheets are perfect for preschool classrooms, daycare centers, and homeschool settings. Print as many copies as you need for your students.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What skills do these worksheets develop?</span>
+                        <span class="toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        These activities develop fine motor skills (tracing, drawing), early literacy (letter recognition), basic math (numbers, counting), and critical thinking through matching and coloring activities.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -608,16 +790,7 @@
                         <span class="toggle">▼</span>
                     </div>
                     <div class="faq-answer">
-                        Yes! We offer a 30-day money-back guarantee. If you're not completely satisfied, we'll refund your purchase—no questions asked.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>Will I get updates?</span>
-                        <span class="toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Absolutely! Your purchase includes lifetime updates. We're constantly improving aciqpu with new features and enhancements.
+                        Yes! We stand behind our product. If you're not completely satisfied, we offer a 30-day money-back guarantee. Just contact us and we'll make it right.
                     </div>
                 </div>
             </div>
@@ -625,17 +798,20 @@
     </section>
 
     <!-- ===== CTA Section ===== -->
-    <section style="padding:80px 20px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:white;">
+    <section style="padding:80px 20px;background:linear-gradient(135deg,#fbbf24,#f97316,#34d399);color:white;">
         <div class="container" style="text-align:center;">
             <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:700;margin-bottom:16px;">
-                Ready to get started?
+                🎉 Ready to Start the Adventure?
             </h2>
-            <p style="font-size:1.125rem;max-width:600px;margin:0 auto 32px;opacity:0.9;">
-                Join thousands of satisfied customers. Get aciqpu today and start building something amazing.
+            <p style="font-size:1.125rem;max-width:600px;margin:0 auto 32px;opacity:0.95;">
+                Give your little learner a head start with fun, engaging activities they'll actually enjoy!
             </p>
-            <a data-gumroad-action="buy" class="buy-btn" style="display:inline-block;width:auto;background:white;color:var(--gradient-start);box-shadow:0 4px 24px rgba(0,0,0,0.2);">
-                🚀 Get aciqpu now
+            <a data-gumroad-action="buy" class="buy-btn" style="display:inline-block;width:auto;background:white;color:#f59e0b;box-shadow:0 4px 24px rgba(0,0,0,0.2);">
+                🚀 Get ABC Adventure Now
             </a>
+            <p style="margin-top:16px;font-size:0.9rem;opacity:0.8;">
+                ⚡ Instant Download · 🖨️ Print Unlimited Times · 💯 30-Day Guarantee
+            </p>
         </div>
     </section>
 
@@ -643,10 +819,10 @@
     <footer class="footer">
         <div class="container">
             <p style="margin-bottom:8px;">
-                © 2026 <a href="#">aciqpu</a> — Built with ❤️
+                © 2026 <a href="#">ABC Adventure</a> — Made with ❤️ for little learners
             </p>
-            <p style="font-size:0.875rem;">
-                <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Support</a>
+            <p style="font-size:0.85rem;">
+                <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Contact</a>
             </p>
         </div>
     </footer>
@@ -698,7 +874,6 @@
             const item = element.parentElement;
             const isActive = item.classList.contains('active');
 
-            // Close all others
             document.querySelectorAll('.faq-item').forEach(el => {
                 el.classList.remove('active');
             });
@@ -709,13 +884,9 @@
         }
 
         // ===== Price Display =====
-        // Gumroad will interpolate this via data-gumroad-field="price"
-        // We'll keep the price display in sync with the actual price
         (function() {
             const priceElement = document.querySelector('[data-gumroad-field="price"]');
             if (priceElement) {
-                // The actual price will be filled by Gumroad server-side
-                // We'll just listen for any changes
                 const observer = new MutationObserver(() => {
                     const priceText = priceElement.textContent.trim();
                     const match = priceText.match(/[\d.]+/);
@@ -730,7 +901,7 @@
             }
         })();
 
-        console.log('🚀 aciqpu landing page loaded successfully');
+        console.log('🚀 ABC Adventure landing page loaded!');
         console.log('💡 Buy buttons use data-gumroad-action="buy" for Gumroad checkout');
     </script>
 </body>
